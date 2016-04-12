@@ -410,6 +410,11 @@ if customize.addRegressionInput:
 if "0T" in customize.idversion:
     variables.extend(
         [
+            # raw 5x5 kinematics
+            "leadE5x5              :=leadingPhoton.full5x5_e5x5",
+            "subleadE5x5           :=subLeadingPhoton.full5x5_e5x5",
+            "mass5x5               :=sqrt(2*leadingPhoton.full5x5_e5x5/cosh(leadingPhoton.eta)*subLeadingPhoton.full5x5_e5x5/cosh(subLeadingPhoton.eta)*(cosh(abs( leadingPhoton.eta - subLeadingPhoton.eta )) - cos( leadingPhoton.phi - subLeadingPhoton.phi )))",
+            # photon ID
             "leadSigmaIpIp         := sqrt(leadingPhoton.sipip)",
             "leadTrkIso            := leadingPhoton.nTrkSolidConeDR03",
             "leadChgNum            := leadingView.pfChNum03WrtChosenVtx",

@@ -1,9 +1,50 @@
 {
+    "_processes" : {
+	"RSGravToGG_kMpl-01_M-1000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-1000_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-1250_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-1250_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-1500_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-1500_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-1750_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-1750_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-2000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-2000_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-2250_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-2250_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-2500_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-2500_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-2750_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-2750_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-3000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-3000_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-3500_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-3500_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-4000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-4000_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-4500_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-4500_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-5000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-5000_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-500_TuneCUEP8M1_13TeV-pythia8"  : [ [ "/RSGravToGG_kMpl-01_M-500_TuneCUEP8M1_13TeV-pythia8",  { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-5500_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-5500_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-6000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-6000_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-6500_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-6500_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-7000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-01_M-7000_TuneCUEP8M1_13TeV-pythia8", { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-01_M-750_TuneCUEP8M1_13TeV-pythia8"  : [ [ "/RSGravToGG_kMpl-01_M-750_TuneCUEP8M1_13TeV-pythia8",  { "njobs" : 2 } ] ]
+    },
+
     "processes" : {
-        "RSGrav" :
-        [
-            "/RSGravToGG_kMpl-001_M-750_TuneCUEP8M1_13TeV-pythia8/spigazzi-diphotons0T_v4-1_2_0-73-ga33ac69-v0-RunIIFall15MiniAODv2-PU25nsData2015v1_0T_magnetOffBS0T_76X_mcRun2_0T_v1-v1-04158c52b1700b25f469a4957a4a876b/USER"
-        ]
+	"RSGravToGG_kMpl-001_M-1000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-001_M-1000_TuneCUEP8M1_13TeV-pythia8" , { "args" : ["massPoint=1000"] } ] ],
+	"RSGravToGG_kMpl-001_M-1500_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-001_M-1500_TuneCUEP8M1_13TeV-pythia8" , { "args" : ["massPoint=1500"] } ] ],
+	"RSGravToGG_kMpl-001_M-2000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-001_M-2000_TuneCUEP8M1_13TeV-pythia8" , { "args" : ["massPoint=2000"] } ] ],
+	"RSGravToGG_kMpl-001_M-3000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-001_M-3000_TuneCUEP8M1_13TeV-pythia8" , { "args" : ["massPoint=3000"] } ] ],
+	"RSGravToGG_kMpl-001_M-4000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-001_M-4000_TuneCUEP8M1_13TeV-pythia8" , { "args" : ["massPoint=4000"] } ] ],
+	"RSGravToGG_kMpl-001_M-5000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-001_M-5000_TuneCUEP8M1_13TeV-pythia8" , { "args" : ["massPoint=5000"] } ] ],
+	"RSGravToGG_kMpl-001_M-500_TuneCUEP8M1_13TeV-pythia8" :  [ [ "/RSGravToGG_kMpl-001_M-500_TuneCUEP8M1_13TeV-pythia8"  , { "args" : ["massPoint=500"] } ] ],
+	"RSGravToGG_kMpl-001_M-6000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-001_M-6000_TuneCUEP8M1_13TeV-pythia8" , { "args" : ["massPoint=6000"] } ] ],
+	"RSGravToGG_kMpl-001_M-7000_TuneCUEP8M1_13TeV-pythia8" : [ [ "/RSGravToGG_kMpl-001_M-7000_TuneCUEP8M1_13TeV-pythia8" , { "args" : ["massPoint=7000"] } ] ],
+	"RSGravToGG_kMpl-001_M-750_TuneCUEP8M1_13TeV-pythia8" :  [ [ "/RSGravToGG_kMpl-001_M-750_TuneCUEP8M1_13TeV-pythia8"  , { "args" : ["massPoint=750"] } ] ]
+    },
+
+    "_processes" : {
+	"RSGravToGG_kMpl-02_M-1000_TuneCUEP8M1_13TeV-pythia8" :  [ [ "/RSGravToGG_kMpl-02_M-1000_TuneCUEP8M1_13TeV-pythia8"  , { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-02_M-1500_TuneCUEP8M1_13TeV-pythia8" :  [ [ "/RSGravToGG_kMpl-02_M-1500_TuneCUEP8M1_13TeV-pythia8"  , { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-02_M-2000_TuneCUEP8M1_13TeV-pythia8" :  [ [ "/RSGravToGG_kMpl-02_M-2000_TuneCUEP8M1_13TeV-pythia8"  , { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-02_M-3000_TuneCUEP8M1_13TeV-pythia8" :  [ [ "/RSGravToGG_kMpl-02_M-3000_TuneCUEP8M1_13TeV-pythia8"  , { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-02_M-4000_TuneCUEP8M1_13TeV-pythia8" :  [ [ "/RSGravToGG_kMpl-02_M-4000_TuneCUEP8M1_13TeV-pythia8"  , { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-02_M-5000_TuneCUEP8M1_13TeV-pythia8" :  [ [ "/RSGravToGG_kMpl-02_M-5000_TuneCUEP8M1_13TeV-pythia8"  , { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-02_M-500_TuneCUEP8M1_13TeV-pythia8" :   [ [ "/RSGravToGG_kMpl-02_M-500_TuneCUEP8M1_13TeV-pythia8"   , { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-02_M-6000_TuneCUEP8M1_13TeV-pythia8" :  [ [ "/RSGravToGG_kMpl-02_M-6000_TuneCUEP8M1_13TeV-pythia8"  , { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-02_M-7000_TuneCUEP8M1_13TeV-pythia8" :  [ [ "/RSGravToGG_kMpl-02_M-7000_TuneCUEP8M1_13TeV-pythia8"  , { "njobs" : 2 } ] ],
+	"RSGravToGG_kMpl-02_M-750_TuneCUEP8M1_13TeV-pythia8" :   [ [ "/RSGravToGG_kMpl-02_M-750_TuneCUEP8M1_13TeV-pythia8"   , { "njobs" : 2 } ] ]
     },
     "cmdLine" : "campaign=diphotons0T_v5 processType=signal useAAA=True"
 }
