@@ -3617,6 +3617,28 @@ kmax * number of nuisance parameters (source of systematic uncertainties)
             
             self.keep( [pdf,linc] )
 
+
+        elif model == "pow4":                
+            pname = "pow4_%s" % name
+            cname = self.getPdfCoeffLabel(pname)
+            p1 = self.buildRooVar("%s_p1" % cname,[0.0,-1,1], importToWs=False)
+            p2 = self.buildRooVar("%s_p2" % cname,[0.0,-1,1], importToWs=False)
+            p3 = self.buildRooVar("%s_p3" % cname,[0.0,-1,1], importToWs=False)
+            linc = self.buildRooVar("%s_lin" % cname,[-20.0,-1.0], importToWs=False)
+            linc.setVal(-1.5)
+            
+            self.pdfPars_.add(p1)
+            self.pdfPars_.add(p2)
+            self.pdfPars_.add(p3)
+            self.pdfPars_.add(linc)
+            
+            ## print "Using RooGenericPdf"
+            roolist = ROOT.RooArgList( xvar, p1, p2, p3, linc )
+            pdf = ROOT.RooGenericPdf( pname, pname, "TMath::Max(1e-50,pow(@0+@1*@0*@0+@2*@0*@0*@0+@3*@0*@0*@0*@0, @4))", roolist )
+            
+            
+            self.keep( [pdf, p1, p2, p3, linc] )
+            
             
         if model == "maxdijet":
             pname = "maxdijet_%s" % name

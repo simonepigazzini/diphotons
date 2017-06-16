@@ -320,12 +320,15 @@ class TemplatesApp(PlotApp):
         if nprint == 0:
             nprint = 1
         iobj  = 0
+
         for key,val in self.store_.iteritems():
             val.CloneTree().Write(key,ROOT.TObject.kWriteDelete)
             iobj += 1
             if iobj % nprint == 1:
                 print "written %d / %d trees" % ( iobj, nobjs )
-        print "writing workspace ...",
+
+        print "writing workspace ..."
+        print(self.workspace_)
         self.workspace_.Write()
         print "done"
         fout.Close()

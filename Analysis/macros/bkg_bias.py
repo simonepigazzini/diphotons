@@ -88,6 +88,7 @@ class BiasApp(CombineApp):
                         make_option("--components",dest="components",action="callback",type="string",callback=optpars_utils.ScratchAppend(str),
                                     help="Background components",default=[],
                                     ),
+                        make_option("--use-data",dest="use_data",action="store_true",default=False),                    
                         make_option("--models",dest="models",action="callback",type="string",callback=optpars_utils.ScratchAppend(str),
                                     help="Backround models",default=[],
                                     ),
@@ -478,26 +479,25 @@ class BiasApp(CombineApp):
             categories = options.test_categories
         else:
             categories = fit["categories"].keys()
-        
-        for comp,model in zip(options.components,options.models):
+
+        for comp,model in zip(options.components,options.models):            
             if comp != "":
                 comp = "%s_" % comp
             for cat in categories:
-                
                 ## roobs = self.getObservable(cat)
 
                 if options.use_data:
-                    treename = "data_tree_%s%s_%s" % (comp,fitname,cat)
+                    treename = "data_%s%s_%s" % (comp,fitname,cat)
                 else:                    
                     treename = "mctruth_%s%s_%s" % (comp,fitname,cat)
-                
+
                 print treename
                 dset = self.rooData(treename)
                 dset.Print()
 
                 reduced = dset.reduce(ROOT.RooArgSet(roobs),"%s > %f && %s < %f" % (roobs.GetName(),roobs.getMin(),roobs.GetName(),roobs.getMax()))
                 binned = reduced.binnedClone()
-                
+
                 if options.throw_from_model:
                     print "Throwing toys from fit to full dataset"
 
@@ -597,7 +597,7 @@ class BiasApp(CombineApp):
                     self.workspace_.rooImport(asimov)
                 else:
                     for toy in range(ntoys):
-                        ## print "Generating", toy
+                        print "Generating", toy
                         data = pdf.generate(ROOT.RooArgSet(roobs),ROOT.gRandom.Poisson(tnorm)) ## 
                         if options.binned_toys: data=data.binnedClone()
                         toyname = "toy_%s%s_%d" % (comp,cat,toy)
@@ -652,8 +652,9 @@ class BiasApp(CombineApp):
                 comp = "%s_" % comp
             print comp,model
             categories = options.test_categories if len(options.test_categories)>0 else fit["categories"].keys()
-            for cat in categories:
+            for cat in categories:                
                 pdf = self.buildPdf(model,"%s%s" % (comp,cat), roobs )
+                print "############PDF ", pdf, comp, cat, model
                 
                 biases = {}
                 for testRange in testRanges:
@@ -661,13 +662,16 @@ class BiasApp(CombineApp):
                     ntp = ROOT.TNtuple("tree_bias_%s%s_%s_%s" % (comp,cat,model,rname),"tree_bias_%s%s_%s_%s" % (comp,cat,model,rname),"toy:truth:fit:minos:errhe:errp:errm:bias:fitmin:fitmax" )
                     biases[rname] = ntp
                     self.store_[ntp.GetName()] = ntp
-                    
-                generator = self.rooPdf("pdf_mctruth_%s%s_%s" % (comp,fitname,cat))
-                gnorm     = self.buildRooVar("norm_mctruth_%s%s_%s" % (comp,fitname,cat), [], recycle=True)
+
+                if options.use_data:
+                    generator = self.rooPdf("pdf_data_%s%s_%s" % (comp,fitname,cat))
+                    gnorm     = self.buildRooVar("norm_data_%s%s_%s" % (comp,fitname,cat), [], recycle=True)
+                else:
+                    generator = self.rooPdf("pdf_mctruth_%s%s_%s" % (comp,fitname,cat))
+                    gnorm     = self.buildRooVar("norm_mctruth_%s%s_%s" % (comp,fitname,cat), [], recycle=True)
                 gnorm.Print() 
                 
                 trueNorms = {}
-                print generator
                 generator.Print()
                 roobs.Print()
                 pobs  = generator.getDependents(ROOT.RooArgSet(roobs))[roobs.GetName()]
@@ -687,15 +691,21 @@ class BiasApp(CombineApp):
                     
                 for toy,toyname in toyslist.iteritems():
                     dset = self.rooData(toyname).reduce("%s > %f && %s < %f" % (roobs.GetName(),minx,roobs.GetName(),maxx))
-                    print dset,pdf
-                    gnll = pdf.createNLL(dset,ROOT.RooFit.Extended())
-                    gminim = ROOT.RooMinimizer(gnll)
-                    gminim.setMinimizerType("Minuit2")                        
-                    gminim.setEps(1000)
-                    gminim.setOffsetting(True)
-                    gminim.setStrategy(2)
-                    gminim.setPrintLevel( -1 if not options.verbose else 2)
-                    gminim.migrad()
+                    print dset
+                    dset.Print()
+                    print pdf
+                    pdf.Print()
+                    fitRes = pdf.fitTo(dset, ROOT.RooFit.Strategy(2), ROOT.RooFit.Warnings(False),
+                                       ROOT.RooFit.Minimizer("Minuit2"), ROOT.RooFit.Save(True))
+                    fitRes.Print()
+                    # gnll = pdf.createNLL(dset, ROOT.RooFit.Extended())
+                    # gminim = ROOT.RooMinimizer(gnll)
+                    # gminim.setMinimizerType("Minuit2")                        
+                    # gminim.setEps(1000)
+                    # gminim.setOffsetting(True)
+                    # gminim.setStrategy(2)
+                    # gminim.setPrintLevel( -1 if not options.verbose else 2)
+                    # gminim.migrad()
 
                     if options.plot_toys_fits:
                         slabel = "%s_%s_%1.0f_%1.0f" % ( cat, model, options.fit_range[0], options.fit_range[1] )
@@ -882,9 +892,9 @@ class BiasApp(CombineApp):
             fin = self.open(fname)
             for key in ROOT.TIter(fin.GetListOfKeys()):
                 name = key.GetName()
-                if name.startswith("tree_bias"):                    
+                if name.startswith("tree_bias"):
                     toks = name.split("_",5)[2:]
-                    #print toks
+                    ## print toks
                     ## ['pp', 'EBEB', 'dijet', 'testRange_2500_3500']
                     comp,cat,model,rng = toks
                     #cat = options.analyze_categories if len(options.analyze_categories)>0 else cat
@@ -914,11 +924,12 @@ class BiasApp(CombineApp):
                         bprofile = bprofiles[slabel]
                         if bias_func:
                             cprofile = cprofiles[slabel]
-                    xmin,xmax = [float(t) for t in rng.split("_")[1:]]
+
+                    xmin,xmax = [float(t) for t in rng.split("_")]
                     xfirst = min(xmin,xfirst)
                     xlast = max(xmax,xlast)
                     ibin = profile.GetN()
-                    
+
                     tree.Draw("bias>>h_bias_%s(501,-5.005,5.005)" % nlabel )
                     hb = ROOT.gDirectory.Get("h_bias_%s" % nlabel )
                     #print hb
@@ -998,7 +1009,6 @@ class BiasApp(CombineApp):
                 styles.append( [ (style_utils.colors,colors[ifunc%len(colors)+icat%len(colors)]), ("SetMarkerStyle",markers[icat % len(markers)]) ] )
             #    styles.append( [ (style_utils.colors,colors[ifunc%len(colors)]+icat), ("SetMarkerStyle",markers[icat % len(markers)]) ] )
                 
-        
         ROOT.gStyle.SetOptFit(0)
         canv = ROOT.TCanvas("profile_bias","profile_bias")
         canv.SetLogx()
