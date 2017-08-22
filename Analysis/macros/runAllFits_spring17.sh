@@ -23,7 +23,7 @@ label=parametric_v3
 ##dir2016=full_analysis_spring16v1_sync_v5_cert_276097
 ## lumi2016=7.64
 
-dir2017=full_analysis_spring17v1_sync_v1
+dir2017=full_analysis_spring17v2_sync_v1
 lumi2017=35.9
 
 eosdir2016=~/eos/cms/store/user/crovelli/WSdiphoton76x_v4

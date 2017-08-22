@@ -88,7 +88,8 @@ class BiasApp(CombineApp):
                         make_option("--components",dest="components",action="callback",type="string",callback=optpars_utils.ScratchAppend(str),
                                     help="Background components",default=[],
                                     ),
-                        make_option("--use-data",dest="use_data",action="store_true",default=False),                    
+                        make_option("--use-data",dest="use_data",action="store_true",default=False),
+                        make_option("--use-asimov",dest="use_asimov",action="store_true",default=False),
                         make_option("--models",dest="models",action="callback",type="string",callback=optpars_utils.ScratchAppend(str),
                                     help="Backround models",default=[],
                                     ),
@@ -111,94 +112,115 @@ class BiasApp(CombineApp):
                                     ),                    
                         make_option("--bias-param",dest="bias_param",action="callback",type="string",callback=optpars_utils.Load(scratch=True),
                                     default={
- ## 5%*mass
- ##   "EBEB_dijet_testRange_500_525" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_525_550" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_550_580" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_580_610" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_610_640" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_640_670" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_670_705" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_705_740" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_740_775" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_775_815" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_815_855" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_855_900" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_900_945" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_945_990" :  "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_990_1040" : "(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1040_1090" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1090_1145" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1145_1205" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1205_1265" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1265_1325" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1325_1395" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1395_1465" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1465_1535" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1535_1615" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1615_1695" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1695_1780" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1780_1865" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1865_1960" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_1960_2060" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_2060_2160" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_2160_2270" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_2270_2380" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_2380_2500" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_2500_2625" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_2625_2760" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_2760_2895" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_2895_3040" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_3040_3195" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_3195_3350" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_3350_3520" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_3520_3695" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_3695_3880" :"(pow(x,2.2-0.4*log(x)))/10.",
- ##   "EBEB_dijet_testRange_3880_4000" :"(pow(x,2.2-0.4*log(x)))/10.",                                       
- ##                                         
- ##   "EBEE_dijet_testRange_500_525" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_525_550" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_550_580" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.",  
- ##   "EBEE_dijet_testRange_580_610" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_610_640" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_640_670" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_670_705" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_705_740" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_740_775" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_775_815" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_815_855" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_855_900" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_900_945" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_945_990" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_990_1040" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1040_1090" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1090_1145" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1145_1205" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1205_1265" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1265_1325" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1325_1395" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1395_1465" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1465_1535" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1535_1615" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1615_1695" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1695_1780" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1780_1865" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1865_1960" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_1960_2060" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_2060_2160" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_2160_2270" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_2270_2380" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_2380_2500" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_2500_2625" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_2625_2760" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_2760_2895" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_2895_3040" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_3040_3195" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_3195_3350" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_3350_3520" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_3520_3695" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_3695_3880" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
- ##   "EBEE_dijet_testRange_3880_4000" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10."                                       
+                                        
+                                        # 2017 (bias from fit to data)
+                                        "dijet_testRange_pow4" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_invpow" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_invpowlin" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_moddijet" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_1000_1200" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_1200_1800" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_1800_2500" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_2500_3500" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_3500_4500" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_4500_5000" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_500_550" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_550_600" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_600_650" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_650_700" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_700_750" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_750_800" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_800_900" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "dijet_testRange_900_1000" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))"
+
+                                        ## 5%*mass 
+ #                                        "EBEB_dijet_testRange_500_525" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_525_550" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_550_580" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_580_610" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_610_640" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_640_670" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_670_705" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_705_740" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_740_775" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_775_815" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_815_855" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_855_900" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_900_945" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_945_990" :  "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_990_1040" : "(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1040_1090" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1090_1145" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1145_1205" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1205_1265" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1265_1325" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1325_1395" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1395_1465" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1465_1535" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1535_1615" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1615_1695" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1695_1780" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1780_1865" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1865_1960" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_1960_2060" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_2060_2160" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_2160_2270" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_2270_2380" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_2380_2500" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_2500_2625" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_2625_2760" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_2760_2895" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_2895_3040" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_3040_3195" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_3195_3350" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_3350_3520" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_3520_3695" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_3695_3880" :"(pow(x,2.2-0.4*log(x)))/10.",
+ #                                        "EBEB_dijet_testRange_3880_4000" :"(pow(x,2.2-0.4*log(x)))/10.",                                       
+ #                                        ##                                         
+ # ##   "EBEE_dijet_testRange_500_525" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_525_550" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_550_580" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.",  
+ # ##   "EBEE_dijet_testRange_580_610" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_610_640" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_640_670" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_670_705" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_705_740" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_740_775" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_775_815" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_815_855" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_855_900" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_900_945" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_945_990" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_990_1040" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1040_1090" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1090_1145" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1145_1205" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1205_1265" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1265_1325" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1325_1395" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1395_1465" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1465_1535" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1535_1615" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1615_1695" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1695_1780" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1780_1865" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1865_1960" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_1960_2060" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_2060_2160" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_2160_2270" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_2270_2380" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_2380_2500" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_2500_2625" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_2625_2760" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_2760_2895" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_2895_3040" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_3040_3195" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_3195_3350" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_3350_3520" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_3520_3695" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_3695_3880" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10.", 
+ # ##   "EBEE_dijet_testRange_3880_4000" :"(x>500.)*(0.10*(x/600.)^(-5)+2e-5)/10."                                       
                                         
  ###10 % *mass                                      
  ##      "EBEB_dijet_testRange_500_550" :  "(pow(x,2.2-0.4*log(x)))/10.",
@@ -460,7 +482,7 @@ class BiasApp(CombineApp):
         if options.throw_toys:
             self.throwToys(options,args)
         
-        if options.fit_toys:
+        if options.fit_toys:            
             self.fitToys(options,args)
 
         if options.analyze_bias:
@@ -501,65 +523,70 @@ class BiasApp(CombineApp):
                 if options.throw_from_model:
                     print "Throwing toys from fit to full dataset"
 
-                    pdf = self.buildPdf(model,"full_%s%s" % (comp,cat), roobs )
+                    if options.use_asimov:
+                        pdf = self.workspace_.pdf("pdf_%s" % treename)
+                    else:
+                        pdf = self.buildPdf(model,"full_%s%s" % (comp,cat), roobs )
                     norm = self.buildRooVar("full_norm_%s_%s%s" %  (model,comp,cat), [], importToWs=False )
                     norm.setVal(dset.sumEntries())
-                    extpdf = ROOT.RooExtendPdf("ext_%s_%s%s" %  (model,comp,cat),"ext_%s_%s%s" %  (model,comp,cat),pdf,norm)
-                    extpdf.fitTo(binned,ROOT.RooFit.Strategy(2))
-                    extpdf.fitTo(reduced,ROOT.RooFit.Strategy(1))
-                    
-                    ## freeze parameters before importing
-                    deps = pdf.getDependents(self.pdfPars_)
-                    itr = deps.createIterator()
-                    var = itr.Next()
-                    while var:
-                        var.setConstant(True)
+                    if not options.use_asimov:
+                        extpdf = ROOT.RooExtendPdf("ext_%s_%s%s" %  (model,comp,cat),"ext_%s_%s%s" %  (model,comp,cat),pdf,norm)
+                        fitRes = extpdf.fitTo(reduced, ROOT.RooFit.Strategy(2), ROOT.RooFit.Warnings(False),
+                                              ROOT.RooFit.Minimizer("Minuit2"), ROOT.RooFit.Save(True))
+                        fitRes.Print()
+                        
+                        ## freeze parameters before importing
+                        deps = pdf.getDependents(self.pdfPars_)
+                        itr = deps.createIterator()
                         var = itr.Next()
+                        while var:
+                            var.setConstant(True)
+                            var = itr.Next()
                     
-                    frame = roobs.frame()
-                    binned.plotOn(frame, ROOT.RooFit.DataError(ROOT.RooAbsData.Poisson))
-                    extpdf.plotOn(frame)
+                            frame = roobs.frame()
+                            binned.plotOn(frame, ROOT.RooFit.DataError(ROOT.RooAbsData.Poisson))
+                            extpdf.plotOn(frame)
                     
 
-                    resid  = roobs.frame()
-                    hist   = frame.getObject(int(frame.numItems()-2))
-                    fit    = frame.getObject(int(frame.numItems()-1))
-                    hresid = frame.residHist(hist.GetName(),fit.GetName(),True)
-                    resid.addPlotable(hresid,"PE")
+                        resid  = roobs.frame()
+                        hist   = frame.getObject(int(frame.numItems()-2))
+                        fit    = frame.getObject(int(frame.numItems()-1))
+                        hresid = frame.residHist(hist.GetName(),fit.GetName(),True)
+                        resid.addPlotable(hresid,"PE")
                     
-                    canv = ROOT.TCanvas("full_fit_%s_%s%s" % (model,comp,cat), "full_fit_%s_%s%s" % (model,comp,cat) )
-                    canv.Divide(1,2)
+                        canv = ROOT.TCanvas("full_fit_%s_%s%s" % (model,comp,cat), "full_fit_%s_%s%s" % (model,comp,cat) )
+                        canv.Divide(1,2)
                     
-                    canv.cd(1)
-                    ROOT.gPad.SetPad(0.,0.35,1.,1.)
-                    ROOT.gPad.SetLogy()
-                    ROOT.gPad.SetLogx()
+                        canv.cd(1)
+                        ROOT.gPad.SetPad(0.,0.35,1.,1.)
+                        ROOT.gPad.SetLogy()
+                        ROOT.gPad.SetLogx()
+                        
+                        canv.cd(2)
+                        ROOT.gPad.SetPad(0.,0.,1.,0.35)
+                    
+                        canv.cd(1)
+                        frame.GetXaxis().SetMoreLogLabels()
+                        frame.GetYaxis().SetLabelSize( frame.GetYaxis().GetLabelSize() * canv.GetWh() / ROOT.gPad.GetWh() )
+                        frame.GetYaxis().SetRangeUser( 1.e-6,500. )
+                        frame.Draw()
 
-                    canv.cd(2)
-                    ROOT.gPad.SetPad(0.,0.,1.,0.35)
-                    
-                    canv.cd(1)
-                    frame.GetXaxis().SetMoreLogLabels()
-                    frame.GetYaxis().SetLabelSize( frame.GetYaxis().GetLabelSize() * canv.GetWh() / ROOT.gPad.GetWh() )
-                    frame.GetYaxis().SetRangeUser( 1.e-6,500. )
-                    frame.Draw()
-
-                    canv.cd(2)
-                    ROOT.gPad.SetGridy()
-                    ROOT.gPad.SetLogx()
-                    resid.GetXaxis().SetMoreLogLabels()
-                    resid.GetYaxis().SetTitleSize( frame.GetYaxis().GetTitleSize() * 6.5/3.5 )
-                    resid.GetYaxis().SetTitleOffset( frame.GetYaxis().GetTitleOffset() * 6.5/3.5 )
-                    resid.GetYaxis().SetLabelSize( frame.GetYaxis().GetLabelSize() * 6.5/3.5 )
-                    resid.GetXaxis().SetTitleSize( frame.GetXaxis().GetTitleSize() * 6.5/3.5 )
-                    resid.GetXaxis().SetLabelSize( frame.GetXaxis().GetLabelSize() * 6.5/3.5 )
-                    resid.GetYaxis().SetTitle("pull")
-                    resid.GetYaxis().SetRangeUser( -5., 5. )
-                    resid.Draw()
+                        canv.cd(2)
+                        ROOT.gPad.SetGridy()
+                        ROOT.gPad.SetLogx()
+                        resid.GetXaxis().SetMoreLogLabels()
+                        resid.GetYaxis().SetTitleSize( frame.GetYaxis().GetTitleSize() * 6.5/3.5 )
+                        resid.GetYaxis().SetTitleOffset( frame.GetYaxis().GetTitleOffset() * 6.5/3.5 )
+                        resid.GetYaxis().SetLabelSize( frame.GetYaxis().GetLabelSize() * 6.5/3.5 )
+                        resid.GetXaxis().SetTitleSize( frame.GetXaxis().GetTitleSize() * 6.5/3.5 )
+                        resid.GetXaxis().SetLabelSize( frame.GetXaxis().GetLabelSize() * 6.5/3.5 )
+                        resid.GetYaxis().SetTitle("pull")
+                        resid.GetYaxis().SetRangeUser( -5., 5. )
+                        resid.Draw()
                     
                     
-                    self.keep(canv)
-                    self.autosave(True)
+                        self.keep(canv)
+                        self.autosave(True)
                     
                 else:
                     pdf = ROOT.RooHistPdf(treename,treename,ROOT.RooArgSet(roobs),binned)
@@ -591,8 +618,8 @@ class BiasApp(CombineApp):
 
                 if ntoys < 0:
                     data = pdf.generate(ROOT.RooArgSet(roobs),ROOT.gRandom.Poisson(tnorm))
-                    asimov = data.binnedClone()
-                    asimov = ROOT.DataSetFiller.throwAsimov(tnorm,pdf,roobs,asimov)
+                    asimov_binned = data.binnedClone()
+                    asimov = ROOT.DataSetFiller.throwAsimov(tnorm,pdf,roobs,asimov_binned)
                     asimov.SetName("toy_%s%s_asimov" % (comp,cat))
                     self.workspace_.rooImport(asimov)
                 else:
@@ -637,7 +664,7 @@ class BiasApp(CombineApp):
         roobs.setRange("origRange",roobs.getMin(),roobs.getMax())
         print "fullRange", minx, maxx
         roobs.setRange("fullRange",minx,maxx)
-        roobs.setMin(minx)
+        roobs.setMin(max(minx, roobs.getMin()))
         roobs.setMax(maxx)
 
         roowe = self.buildRooVar("weight",[])
@@ -688,7 +715,7 @@ class BiasApp(CombineApp):
                         toyslist[toy]="toy_%s%s_%d" % (comp,cat,toy)
                 else:
                     toyslist[-1] = "toy_%s%s_asimov" % (comp,cat)
-                    
+
                 for toy,toyname in toyslist.iteritems():
                     dset = self.rooData(toyname).reduce("%s > %f && %s < %f" % (roobs.GetName(),minx,roobs.GetName(),maxx))
                     print dset

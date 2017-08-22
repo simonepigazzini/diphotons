@@ -460,15 +460,16 @@ class CombineApp(TemplatesApp):
                                               ### "EBEE_dijet_330_10000" : "((0.1*((x/600.)^-5)))/3.",
                                               ### "EEHighR9_dijet_330_10000" : "((0.1*((x/600.)^-5)))/6.",
                                               ### "EELowR9_dijet_330_10000" : "((0.1*((x/600.)^-5)))/6.",
-                                              ### 
+                                              ###
+                                "EBEB_dijet_230_5000" : "(0.125*(x<600)+(x>=600)*(pow(x,2.585-0.4*log(x)))/10.)/35.9",
                                 "EBEB0T_dijet_230_10000" : "((0.06*((x/600.)^-4))+1e-6)/6.",
                                 "EBEE0T_dijet_330_10000" : "((0.1*((x/600.)^-5)))/6.",
                                 
                                 "EBEB_8TeV_dijet_300_10000" : "((0.06*((x/600.)^-4))+1e-6)/6.",
                                 
-                                "EBEB_dijet_230_10000" : "(pow(x,2.2-0.4*log(x)))/10.",
+                                "EBEB_dijet_230_10000" : "(0.125*(x<600)+(x>=600)*(pow(x,2.585-0.4*log(x)))/10.)/35.9",
                                 "EBEE_dijet_330_10000" : "(0.10*(x/600.)^(-5)+2e-5)/10.",
-                                "EBEB016_dijet_230_10000" : "(pow(x,2.2-0.4*log(x)))/10.",
+                                "EBEB016_dijet_230_10000" : "(0.125*(x<600)+(x>=600)*(pow(x,2.585-0.4*log(x)))/10.)/35.9",
                                 "EBEE016_dijet_330_10000" : "(0.10*(x/600.)^(-5)+2e-5)/10.",
                                 
                                 "EBEB0T_dijet_230_5000" : "((0.06*((x/600.)^-4))+1e-6)/6.",
@@ -478,7 +479,7 @@ class CombineApp(TemplatesApp):
                                 
                                 "EBEB_dijet_230_5000" : "(pow(x,2.2-0.4*log(x)))/10.",
                                 "EBEE_dijet_330_5000" : "(0.10*(x/600.)^(-5)+2e-5)/10.",
-                                "EBEB016_dijet_230_5000" : "(pow(x,2.2-0.4*log(x)))/10.",
+                                "EBEB016_dijet_230_5000" : "(0.125*(x<600)+(x>=600)*(pow(x,2.585-0.4*log(x)))/10.)/35.9",
                                 "EBEE016_dijet_330_5000" : "(0.10*(x/600.)^(-5)+2e-5)/10.",
 
                                 },
@@ -3618,14 +3619,21 @@ kmax * number of nuisance parameters (source of systematic uncertainties)
             self.keep( [pdf,linc] )
 
 
-        elif model == "pow4":                
+        elif model == "pow4":
             pname = "pow4_%s" % name
             cname = self.getPdfCoeffLabel(pname)
-            p1 = self.buildRooVar("%s_p1" % cname,[0.0,-1,1], importToWs=False)
-            p2 = self.buildRooVar("%s_p2" % cname,[0.0,-1,1], importToWs=False)
-            p3 = self.buildRooVar("%s_p3" % cname,[0.0,-1,1], importToWs=False)
+            p1 = self.buildRooVar("%s_p1" % cname,[-3e-3,-1,0], importToWs=False)
+            p2 = self.buildRooVar("%s_p2" % cname,[1e-5,0,1], importToWs=False)
+            p3 = self.buildRooVar("%s_p3" % cname,[1e-8,0,1], importToWs=False)
             linc = self.buildRooVar("%s_lin" % cname,[-20.0,-1.0], importToWs=False)
             linc.setVal(-1.5)
+            if "EE" in name:
+                p1.setVal(-3e-3)
+                p2.setVal(4.06e-6)
+                p3.setVal(2.4e-9)
+                p1.setConstant(False)
+                p2.setConstant(False)
+                p3.setConstant(False)
             
             self.pdfPars_.add(p1)
             self.pdfPars_.add(p2)
@@ -3679,6 +3687,36 @@ kmax * number of nuisance parameters (source of systematic uncertainties)
             pdf = ROOT.RooGenericPdf( pname, pname, "TMath::Max(1e-50,pow(@0,@1+@2*log(@0))*pow(1.-@0*@4,@3))", roolist )
             
             self.keep( [pdf,lina,loga, linb, sqrb] )
+
+        elif model == "moddijet3":
+            pname = "moddijet3_%s" % name
+            cname = self.getPdfCoeffLabel(pname)
+            lina = self.buildRooVar("%s_lina" % cname,[-100,100], importToWs=False)
+            loga = self.buildRooVar("%s_loga" % cname,[-100,100], importToWs=False)
+            linb = self.buildRooVar("%s_linb" % cname,[-100,10], importToWs=False)
+            quab = self.buildRooVar("%s_quab" % cname,[-100,10], importToWs=False)
+            cubb = self.buildRooVar("%s_cubb" % cname,[-10,0], importToWs=False)
+            sqrb = self.buildRooVar("%s_sqrb" % cname,[], importToWs=False)
+            lina.setVal(5.)
+            loga.setVal(-1.)
+            linb.setVal(-0.1)
+            quab.setVal(-0.01)
+            cubb.setVal(-0.001)
+            sqrb.setVal(-1.7)
+            #sqrb.setConstant(1)
+            
+            
+            self.pdfPars_.add(lina)
+            self.pdfPars_.add(loga)
+            self.pdfPars_.add(linb)
+            self.pdfPars_.add(sqrb)
+            
+            roolist = ROOT.RooArgList( xvar, lina, loga, linb, quab, cubb, sqrb )
+            pdf = ROOT.RooGenericPdf( pname, pname,
+                                      "TMath::Max(1e-50,pow(@0,@1+@2*log(@0))*pow(1.-(@3*@0+@4*@0*@0+@5*@0*@0*@0),@6))", roolist)
+            
+            self.keep( [pdf,lina,loga, linb, sqrb] )
+
         elif model == "expow":
             
             pname = "expow_%s" % name
@@ -3700,12 +3738,15 @@ kmax * number of nuisance parameters (source of systematic uncertainties)
             
             pname = "expow2_%s" % name
             cname = self.getPdfCoeffLabel(pname)
-            lam0 = self.buildRooVar("%s_lambda0" % cname,[], importToWs=False)
-            lam1 = self.buildRooVar("%s_lambda1" % cname,[], importToWs=False)
-            alp = self.buildRooVar("%s_alpha"  % cname,[], importToWs=False)
-            lam0.setVal(0.)
-            lam1.setVal(0.)
-            alp.setVal(2.)
+            lam0 = self.buildRooVar("%s_lambda0" % cname,[-100., 100.], importToWs=False)
+            lam1 = self.buildRooVar("%s_lambda1" % cname,[-100., 100.], importToWs=False)
+            alp = self.buildRooVar("%s_alpha"  % cname,[-20, -0.00001], importToWs=False)
+            lam0.setConstant(False)
+            lam1.setConstant(False)
+            alp.setConstant(False)
+            lam0.setVal(-0.0001)
+            lam1.setVal(-0.000001)
+            alp.setVal(-2.)
             
             self.pdfPars_.add(alp)
             self.pdfPars_.add(lam0)
@@ -3713,8 +3754,8 @@ kmax * number of nuisance parameters (source of systematic uncertainties)
             
             bla = ROOT.RooArgList(lam0,lam1)
             hmax = ROOT.RooFormulaVar("%s_hmax" % cname,"( @1 != 0. ? (-@0/(4.*@1)>300. && -@0/(4.*@1)<3500. ? @0*@0/(4.*@1+@1) : TMath::Max(@0*3500+2*@1*3500.*3500,@0*3500+2*@1*300.*300)) : @0*3500.)", bla )
-            roolist = ROOT.RooArgList( xvar, lam0, lam1, alp, hmax )
-            pdf = ROOT.RooGenericPdf( pname, pname, "exp( @1*@0+@2*@0*@0   )*pow(@0, -@3*@3 + @4  )", roolist )
+            roolist = ROOT.RooArgList( xvar, lam0, lam1, alp )
+            pdf = ROOT.RooGenericPdf( pname, pname, "TMath::Max(1e-50, exp( @1*@0+@2*@0*@0 )*pow(@0, @3))", roolist )
             
             self.keep( [pdf,lam0,lam1,alp,hmax] )
 
@@ -3722,8 +3763,8 @@ kmax * number of nuisance parameters (source of systematic uncertainties)
             
             pname = "invpow_%s" % name
             cname = self.getPdfCoeffLabel(pname)
-            slo = self.buildRooVar("%s_slo" % cname,[], importToWs=False)
-            alp = self.buildRooVar("%s_alp" % cname,[], importToWs=False)
+            slo = self.buildRooVar("%s_slo" % cname,[-100, 100.], importToWs=False)
+            alp = self.buildRooVar("%s_alp" % cname,[-20., 0.], importToWs=False)
             slo.setVal(2.e-3)
             alp.setVal(-7.)
             

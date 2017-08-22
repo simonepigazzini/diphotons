@@ -7,7 +7,7 @@ ntoys=$1 && shift
 perjob=1
 [ -n $1 ] && perjob=$1 && shift
 
-mkdir $output
+mkdir -p $output
 
 for toy in $(seq 0 $perjob `expr ${ntoys} - 1`); do
     bsub -q $queue -o $output/log_$toy.log run_toy.sh $PWD/$input $PWD/$output/toy_$toy.root $toy $perjob $@

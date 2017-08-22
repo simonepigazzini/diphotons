@@ -5,4 +5,4 @@ if [[ -n "$bad" ]]; then
     echo $bad | xargs rm -v | wc -l
 fi
 
-hadd -f $1/toys.root $1/toy_*.root
+hadd $1/toys.root $1/toy_*.root

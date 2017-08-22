@@ -20,26 +20,26 @@ fi
 ## www=$(echo $target | sed 's%_cic.*%%')
 www=limits
 
-mkdir -p ~/www/exo/spring16/$www/$target
+mkdir -p ~/www/exo/spring17/$www/$target
 
 ### args="--blind --fixed-x-section 1.e-3 --use-fb --load lumi_internal.json --lumi $lumi --saveas pdf,png,root "
-### ./limit_plots.py --do-limits -M Asymptotic  $args --input-dir $target -O ~/www/exo/spring16/$www/$target/expected_limits
+### ./limit_plots.py --do-limits -M Asymptotic  $args --input-dir $target -O ~/www/exo/spring17/$www/$target/expected_limits
 ### 
 ### exit
 
 set -x
-./limit_plots.py --do-limits -M Asymptotic  $args --input-dir $target -O ~/www/exo/spring16/$www/$target/limits --cleanup -k 01,02
-./limit_plots.py --do-limits -M Asymptotic  $args --input-dir $target -O ~/www/exo/spring16/$www/$target/limits_smoothen --smoothen --cleanup -k 001
+./limit_plots.py --do-limits -M Asymptotic  $args --input-dir $target -O ~/www/exo/spring17/$www/$target/limits --cleanup -k 01,02 -B --saveas png,pdf,root
+./limit_plots.py --do-limits -M Asymptotic  $args --input-dir $target -O ~/www/exo/spring17/$www/$target/limits_smoothen --smoothen --cleanup -k 001 -B --saveas png,pdf,root
 
-hadd -f $target/graphs_Asymptotic.root $target/graphs_01_02_Asymptotic.root $target/graphs_001_Asymptotic.root
+# hadd -f $target/graphs_Asymptotic.root $target/graphs_01_02_Asymptotic.root $target/graphs_001_Asymptotic.root
 
-## ./limit_plots.py --do-limits -M Asymptotic  $args --label minimStrat2 --input-dir $target -O ~/www/exo/spring16/$www/$target/limits_minimStrat2 --smoothen
-## ./limit_plots.py --do-limits -M Asymptotic  $args --label minimStrat2 --input-dir $target -O ~/www/exo/spring16/$www/$target/limits_minimStrat2
-## ./limit_plots.py --do-limits -M Asymptotic  $args --label freezeEScaleNu --input-dir $target -O ~/www/exo/spring16/$www/$target/limits_minimStrat2
+## ./limit_plots.py --do-limits -M Asymptotic  $args --label minimStrat2 --input-dir $target -O ~/www/exo/spring17/$www/$target/limits_minimStrat2 --smoothen
+## ./limit_plots.py --do-limits -M Asymptotic  $args --label minimStrat2 --input-dir $target -O ~/www/exo/spring17/$www/$target/limits_minimStrat2
+## ./limit_plots.py --do-limits -M Asymptotic  $args --label freezeEScaleNu --input-dir $target -O ~/www/exo/spring17/$www/$target/limits_minimStrat2
 
-./limit_plots.py --do-pvalues -M ProfileLikelihood $args --input-dir $target -O ~/www/exo/spring16/$www/$target/limits
-## ./limit_plots.py --do-pvalues -M ProfileLikelihood $args --input-dir $target --label freezeNu -O ~/www/exo/spring16/$www/$target/limits_freezeNu
-## ./limit_plots.py --do-pvalues -M ProfileLikelihood $args --input-dir $target --label freezeEScaleNu -O ~/www/exo/spring16/$www/$target/limits_freezeNu
+# ./limit_plots.py --do-pvalues -M ProfileLikelihood $args --input-dir $target -O ~/www/exo/spring17/$www/$target/limits
+## ./limit_plots.py --do-pvalues -M ProfileLikelihood $args --input-dir $target --label freezeNu -O ~/www/exo/spring17/$www/$target/limits_freezeNu
+## ./limit_plots.py --do-pvalues -M ProfileLikelihood $args --input-dir $target --label freezeEScaleNu -O ~/www/exo/spring17/$www/$target/limits_freezeNu
 
 
 ### ###  
