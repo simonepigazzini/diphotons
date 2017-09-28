@@ -1,4 +1,4 @@
-label=parametric_v3
+label=old_bias
 
 ### 2016 
 ### dir2016=full_analysis_spring16v1_sync_v4_cert_274443
@@ -23,7 +23,7 @@ label=parametric_v3
 ##dir2016=full_analysis_spring16v1_sync_v5_cert_276097
 ## lumi2016=7.64
 
-dir2017=full_analysis_spring17v2_sync_v1
+dir2017=full_analysis_spring17v2_sync_v3
 lumi2017=35.9
 
 eosdir2016=~/eos/cms/store/user/crovelli/WSdiphoton76x_v4
@@ -38,7 +38,7 @@ common_opts="--plot-fit-bands --rescale-signal-to 1e-3 --minos-bands --compute-f
 
 ## ./combine_maker.sh $dir2016 --lumi $lumi2016 --lumistr $lumi2016 --fit-name cic2016  $common_opts --fit-background --load lumi.json --label pr_plot --no-plot-fit-bands --read-ws full_analysis_spring16v2_sync_v6_ichep_cic2016_default_shapes_spin0_parametric_v2_lumi_12.9/full_analysis_spring16v2_sync_v6_ichep_cic2016_default_shapes_spin0_parametric_v2_lumi_12.9_grav_001.root --read-ws full_analysis_spring16v2_sync_v6_ichep_cic2016_default_shapes_spin0_parametric_v2_lumi_12.9/full_analysis_spring16v2_sync_v6_ichep_cic2016_default_shapes_spin0_parametric_v2_lumi_12.9.root --make-pr-plot 
 
-exit
+# exit
 
 ### common_opts="--plot-fit-bands --rescale-signal-to 1e-3 --minos-bands --compute-fwhm --prepare-data --no-parametric-signal-nuisances --saveas pdf,root,convert_png --plot-blind 500,13000"
 ### ./combine_maker.sh $dir2016 --lumi $lumi2016 --fit-name cic2016  $common_opts --fit-background --mag-field 3.8T --load lumi.json --label fit_blind
@@ -50,15 +50,16 @@ exit
 ## common_opts="--plot-fit-bands --rescale-signal-to 1e-3 --minos-bands --compute-fwhm --prepare-data --no-parametric-signal-nuisances --saveas pdf,root,convert_png --plot-blind 500,13000"
 ## ./combine_maker.sh $dir2016 --lumi $lumi2016 --fit-name cic2016  $common_opts --fit-background --load lumi.json --label fit_blind
 
-common_opts="--rescale-signal-to 1e-3 --compute-fwhm --generate-ws-bkgnbias-new --prepare-data --do-parametric-signal-nuisances --plot-blind 500,4000"
+common_opts="--rescale-signal-to 1e-3 --minos-bands --compute-fwhm --generate-ws-bkgnbias-new --prepare-data --do-parametric-signal-nuisances --plot-blind 500,4000"
 
-parallel --ungroup -j 1 "./combine_maker.sh $dir2016 --lumi $lumi2016 --fit-name cic2016 $common_opts --parametric-signal-new ~soffi/public/4Pasquale/ParametricSignalModels/SignalParametericShapes80X_ws_kMpl{}.root   --parametric-signal-acceptance  acceptance_76.json --load lumi.json --only-coups {}   --label spin2_${label} --do-parametric-signal-nuisances --model-strip-coeff-names 016" ::: $coups &
+parallel --ungroup -j 1 "./combine_maker.sh $dir2017 --lumi $lumi2017 --fit-name cic2016 $common_opts --parametric-signal-new /afs/cern.ch/work/s/spigazzi/Xgg/CMSSW_8_0_26_patch1/src/DiPhotonSignalModel/ProduceSignalModel/80X/SignalParametericShapes80X_ws_kMpl{}.root --parametric-signal-acceptance  acceptance_76.json --load lumi.json --only-coups {}   --label spin2_${label} --do-parametric-signal-nuisances --model-strip-coeff-names 016" ::: $coups &
 
-parallel --ungroup -j 1 "./combine_maker.sh $dir2016 --lumi $lumi2016 --fit-name cic2016 $common_opts --parametric-signal-new ~soffi/public/4Pasquale/ParametricSignalModels/SignalParametericShapes80X_ws_kMpl{}.root --parametric-signal-acceptance  acceptance_76_spin0.json --load lumi.json --only-coups {}   --label spin0_${label} --do-parametric-signal-nuisances --model-strip-coeff-names 016" ::: $coups &
+parallel --ungroup -j 1 "./combine_maker.sh $dir2017 --lumi $lumi2017 --fit-name cic2016 $common_opts --parametric-signal-new /afs/cern.ch/work/s/spigazzi/Xgg/CMSSW_8_0_26_patch1/src/DiPhotonSignalModel/ProduceSignalModel/80X/SignalParametericShapes80X_ws_kMpl{}.root --parametric-signal-acceptance  acceptance_76_spin0.json --load lumi.json --only-coups {}   --label spin0_${label} --do-parametric-signal-nuisances --model-strip-coeff-names 016" ::: $coups &
 
 
 wait
 
+exit
 
 ## 2015 13TeV
 dir38=full_analysis_moriond16v1_sync_v4_data

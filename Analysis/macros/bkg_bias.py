@@ -114,24 +114,47 @@ class BiasApp(CombineApp):
                                     default={
                                         
                                         # 2017 (bias from fit to data)
-                                        "dijet_testRange_pow4" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_invpow" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_invpowlin" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_moddijet" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_1000_1200" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_1200_1800" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_1800_2500" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_2500_3500" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_3500_4500" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_4500_5000" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_500_550" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_550_600" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_600_650" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_650_700" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_700_750" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_750_800" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_800_900" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
-                                        "dijet_testRange_900_1000" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))"
+                                        ## EBEB
+                                        "EBEB_dijet_testRange_pow4" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_expow2" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_invpow" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_invpowlin" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_moddijet" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_1000_1200" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_1200_1800" :  "0.125*(x<650)+(x>=650)*1.3*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_1800_2500" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_2500_3500" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_3500_4500" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_4500_5000" :  "0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_500_550" :  "2*0.125*(x<650)+(x>=650)*2*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_550_600" :  "2*0.125*(x<650)+(x>=650)*2*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_600_650" :  "2*0.125*(x<650)+(x>=650)*2*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_650_700" :  "2*0.125*(x<650)+(x>=650)*2.4*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_700_750" :  "2*0.125*(x<650)+(x>=650)*2.2*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_750_800" :  "2*0.125*(x<650)+(x>=650)*2.3*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_800_900" :  "2*0.125*(x<650)+(x>=650)*2*(pow(x,2.0-0.36*log(x)))",
+                                        "EBEB_dijet_testRange_900_1000" :  "2*0.125*(x<650)+(x>=650)*2*(pow(x,2.0-0.36*log(x)))",
+                                        
+                                        ## EBEE
+                                        "EBEE_dijet_testRange_pow4" :  "0.2*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_expow2" :  "0.2*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_invpow" :  "0.2*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_invpowlin" :  "0.2*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_moddijet" :  "0.2*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_1000_1200" :  "0.2*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_1200_1800" :  "0.2*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_1800_2500" :  "0.2*(x<850)+(x>=850)*3*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_2500_3500" :  "0.2*(x<850)+(x>=850)*3*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_3500_4500" :  "0.2*(x<850)+(x>=850)*3*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_4500_5000" :  "0.2*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_500_550" :  "0.5*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_550_600" :  "0.2*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_600_650" :  "0.3*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_650_700" :  "0.3*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_700_750" :  "0.3*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_750_800" :  "0.3*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_800_900" :  "0.2*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)",
+                                        "EBEE_dijet_testRange_900_1000" :  "0.2*(x<850)+(x>=850)*(pow(x/600,-3.5-0.2*log(x))+1e-4)"
 
                                         ## 5%*mass 
  #                                        "EBEB_dijet_testRange_500_525" :  "(pow(x,2.2-0.4*log(x)))/10.",
@@ -930,7 +953,7 @@ class BiasApp(CombineApp):
                     toks.append(label)
                     nlabel = "_".join(toks)
                     slabel = "_".join([cat,model,label])
-                    slabel2 = "_".join([cat,model,rng])
+                    slabel2 = "_".join([comp,cat,model,rng])
                     bias_func = None
                     if slabel2 in options.bias_param:
                         bias_func = ROOT.TF1("err_correction",options.bias_param[slabel2],0,2e+6)
@@ -1074,8 +1097,8 @@ class BiasApp(CombineApp):
             ## profile.Fit(func,"R+")
             ## fit = profile.GetListOfFunctions().At(0)
             ## fits.append([key,fit])
-            if key in options.bias_param:
-                bias_func = ROOT.TF1("err_correction_%s" % key,options.bias_param[key],xfirst,xlast)
+            if comp+"_"+key in options.bias_param:
+                bias_func = ROOT.TF1("err_correction_%s" % comp+"_"+key,options.bias_param[comp+"_"+key],xfirst,xlast)
                 style_utils.apply( bias_func, style[:1] )
                 bias_func.Draw("same")
                 self.keep(bias_func)
@@ -1155,7 +1178,7 @@ class BiasApp(CombineApp):
         
         self.keep( [canv,leg,bcanv,bleg#,box
                     ] )
-        
+
         if len(ckeys) > 0:
             ccanv = ROOT.TCanvas("profile_corr_pull","profile_corr_pull")
             ccanv.SetLogx()

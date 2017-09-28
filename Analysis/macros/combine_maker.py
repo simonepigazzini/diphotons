@@ -476,12 +476,15 @@ class CombineApp(TemplatesApp):
                                 "EBEE0T_dijet_330_5000" : "((0.1*((x/600.)^-5)))/6.",
                                 
                                 "EBEB_8TeV_dijet_300_5000" : "((0.06*((x/600.)^-4))+1e-6)/6.",
-                                
+
                                 "EBEB_dijet_230_5000" : "(pow(x,2.2-0.4*log(x)))/10.",
                                 "EBEE_dijet_330_5000" : "(0.10*(x/600.)^(-5)+2e-5)/10.",
-                                "EBEB016_dijet_230_5000" : "(0.125*(x<600)+(x>=600)*(pow(x,2.585-0.4*log(x)))/10.)/35.9",
+                                ## Spring17
+                                # "EBEB016_dijet_230_5000" : "(0.125*(x<650)+(x>=650)*(pow(x,2.0-0.36*log(x)))/10.)/35.9",
+                                # "EBEE016_dijet_330_5000" : "(0.2*(x<750)+(x>=750)*0.56*(pow(x/600,-3.5-0.2*log(x))+1.5e-4))/39.5",
+                                ## ICHEP16
+                                "EBEB016_dijet_230_5000" : "(pow(x,2.2-0.4*log(x)))/10.",
                                 "EBEE016_dijet_330_5000" : "(0.10*(x/600.)^(-5)+2e-5)/10.",
-
                                 },
                                     help="Bias as a function of diphoton mass to compute the bias uncertainty values inside the datacard",
                                     ),
@@ -3618,7 +3621,30 @@ kmax * number of nuisance parameters (source of systematic uncertainties)
             
             self.keep( [pdf,linc] )
 
-
+        elif model == "pow3":
+            pname = "pow3_%s" % name
+            cname = self.getPdfCoeffLabel(pname)
+            p1 = self.buildRooVar("%s_p1" % cname,[-3e-3,-1,0], importToWs=False)
+            p2 = self.buildRooVar("%s_p2" % cname,[1e-5,0,1], importToWs=False)
+            linc = self.buildRooVar("%s_lin" % cname,[-20.0,-1.0], importToWs=False)
+            linc.setVal(-1.5)
+            if "EE" in name:
+                p1.setVal(-3e-3)
+                p2.setVal(4.06e-6)
+                p1.setConstant(False)
+                p2.setConstant(False)
+            
+            self.pdfPars_.add(p1)
+            self.pdfPars_.add(p2)
+            self.pdfPars_.add(linc)
+            
+            ## print "Using RooGenericPdf"
+            roolist = ROOT.RooArgList( xvar, p1, p2, linc )
+            pdf = ROOT.RooGenericPdf( pname, pname, "TMath::Max(1e-50,pow(@0+@1*@0*@0+@2*@0*@0*@0, @3))", roolist )
+            
+            
+            self.keep( [pdf, p1, p2, linc] )
+            
         elif model == "pow4":
             pname = "pow4_%s" % name
             cname = self.getPdfCoeffLabel(pname)
@@ -3629,7 +3655,7 @@ kmax * number of nuisance parameters (source of systematic uncertainties)
             linc.setVal(-1.5)
             if "EE" in name:
                 p1.setVal(-3e-3)
-                p2.setVal(4.06e-6)
+                p2.setVal(4.06e-5)
                 p3.setVal(2.4e-9)
                 p1.setConstant(False)
                 p2.setConstant(False)
