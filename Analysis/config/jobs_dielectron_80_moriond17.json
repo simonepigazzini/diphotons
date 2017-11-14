@@ -1,21 +1,17 @@
 {
     "processes" : {
 	    "Data" : [
-                "/SingleElectron/sethzenz-ReMiniAOD-03Feb2017-2_5_0-test-2_5_0-v0-Run2016B-03Feb2017_ver2-v2-284303ef9a9389cbb6f8416e1e0b5d02/USER",
-                "/SingleElectron/sethzenz-ReMiniAOD-03Feb2017-2_5_0-test-2_5_0-v0-Run2016G-03Feb2017-v1-96be18c86c5ee419c026123433e1b12b/USER",
-                "/SingleElectron/sethzenz-ReMiniAOD-03Feb2017-2_5_1-2_5_1-v0-Run2016C-03Feb2017-v1-284303ef9a9389cbb6f8416e1e0b5d02/USER",
-                "/SingleElectron/sethzenz-ReMiniAOD-03Feb2017-2_5_1-2_5_1-v0-Run2016D-03Feb2017-v1-284303ef9a9389cbb6f8416e1e0b5d02/USER",
-                "/SingleElectron/sethzenz-ReMiniAOD-03Feb2017-2_5_1-2_5_1-v0-Run2016E-03Feb2017-v1-284303ef9a9389cbb6f8416e1e0b5d02/USER",
-                "/SingleElectron/sethzenz-ReMiniAOD-03Feb2017-2_5_1-2_5_1-v0-Run2016F-03Feb2017-v1-284303ef9a9389cbb6f8416e1e0b5d02/USER",
-                "/SingleElectron/sethzenz-ReMiniAOD-03Feb2017-2_5_1-2_5_1-v0-Run2016H-03Feb2017_ver2-v1-f7a1685a094a97b996e85b86ada1b7ab/USER",
-                "/SingleElectron/sethzenz-ReMiniAOD-03Feb2017-2_5_1-2_5_1-v0-Run2016H-03Feb2017_ver3-v1-f7a1685a094a97b996e85b86ada1b7ab/USER",
-                "/SingleElectron/sethzenz-ReMiniAOD-03Feb2017-2_5_2-2_5_2-v0-Run2016B-03Feb2017_ver2-v2-284303ef9a9389cbb6f8416e1e0b5d02/USER",
-                "/SingleElectron/sethzenz-ReMiniAOD-03Feb2017-2_5_3-2_5_3-v0-Run2016C-03Feb2017-v1-aa4024d8dbafc39ff6aae5cd4e95e9c0/USER",
-                "/SingleElectron/sethzenz-ReMiniAOD-03Feb2017-2_5_3-2_5_3-v0-Run2016E-03Feb2017-v1-aa4024d8dbafc39ff6aae5cd4e95e9c0/USER",
-                "/SingleElectron/sethzenz-ReMiniAOD-03Feb2017-2_5_3-2_5_3-v0-Run2016H-03Feb2017_ver2-v1-afccc2b2089608f3f9d677de7069cba4/USER"
-                ]
-	    },
-	
-    "cmdLine" : "metaDataSrc=flashgg campaign=ReMiniAOD-03Feb2017-2_5_X idversion=V2 selection=electron massCut=50 ptLead=20 ptSublead=10 trigger=HLT_Ele27_WPTight_Gsf_v* doeleId=1 dohltMatch=1 dol1Match=1 doTnP=1 eleId=isHLTsafe lumiMask=/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/ReReco/Final/Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.txt"
+                "/SingleElectron/spigazzi-EXOSpring17_v2-tag-Moriond17-v10-10-gd4bdfe5-v0-Run2016B-03Feb2017_ver2-v2-a1ec14186931e38750b1f614caa3b38e/USER",
+                "/SingleElectron/spigazzi-EXOSpring17_v2-tag-Moriond17-v10-10-gd4bdfe5-v0-Run2016C-03Feb2017-v1-a1ec14186931e38750b1f614caa3b38e/USER",
+                "/SingleElectron/spigazzi-EXOSpring17_v2-tag-Moriond17-v10-10-gd4bdfe5-v0-Run2016D-03Feb2017-v1-a1ec14186931e38750b1f614caa3b38e/USER",
+                "/SingleElectron/spigazzi-EXOSpring17_v2-tag-Moriond17-v10-10-gd4bdfe5-v0-Run2016E-03Feb2017-v1-a1ec14186931e38750b1f614caa3b38e/USER",
+                "/SingleElectron/spigazzi-EXOSpring17_v2-tag-Moriond17-v10-10-gd4bdfe5-v0-Run2016F-03Feb2017-v1-a1ec14186931e38750b1f614caa3b38e/USER",
+                "/SingleElectron/spigazzi-EXOSpring17_v2-tag-Moriond17-v10-10-gd4bdfe5-v0-Run2016H-03Feb2017_ver2-v1-c421a91455243280eefd5022e18e720c/USER",
+                "/SingleElectron/spigazzi-EXOSpring17_v2-tag-Moriond17-v10-10-gd4bdfe5-v0-Run2016H-03Feb2017_ver3-v1-c421a91455243280eefd5022e18e720c/USER",
+                "/SingleElectron/spigazzi-EXOSpring17_v2-tag-Moriond17-v10-11-gd4bdfe5-v0-Run2016G-03Feb2017-v1-a1ec14186931e38750b1f614caa3b38e/USER"
+            ]
+    },
+
+    "cmdLine" : "metaDataSrc=diphotons campaign=EXOSpring17_v2 idversion=V2 selection=electron massCut=50 ptLead=20 ptSublead=10 trigger=HLT_Ele27_WPTight_Gsf_v* doeleId=1 dohltMatch=1 dol1Match=1 doTnP=1 eleId=isHLTsafe lumiMask=/afs/cern.ch/cms/CAF/CMSCOMM/COMM_DQM/certification/Collisions16/13TeV/ReReco/Final/Cert_271036-284044_13TeV_23Sep2016ReReco_Collisions16_JSON.txt"
 	    
 }
